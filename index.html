@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget Tracker</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <div class="header__inner">
+        <h1 class="header__title">💰 Budget Tracker</h1>
+        <button class="btn btn--icon" id="themeToggle" title="Toggle dark/light mode">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <!-- ===== BALANCE OVERVIEW ===== -->
+      <section class="overview overview--single">
+        <div class="card card--balance" id="totalCard">
+          <span class="card__label">Budget</span>
+          <span class="card__value" id="totalBalance">Rp 0</span>
+        </div>
+      </section>
+
+      <!-- ===== SPENDING LIMIT ALERT ===== -->
+      <div class="limit-alert hidden" id="limitAlert">
+        ⚠️ You have exceeded your spending limit!
+      </div>
+
+      <!-- ===== CONTROLS ROW ===== -->
+      <section class="controls">
+        <!-- Spending Limit -->
+        <div class="controls__group">
+          <label for="spendingLimit" class="label">Spending Limit (Rp)</label>
+          <div class="input-row">
+            <input type="number" id="spendingLimit" class="input" placeholder="e.g. 500000" min="0" />
+            <button class="btn btn--secondary" id="setLimitBtn">Set Limit</button>
+          </div>
+          <span class="limit-display hidden" id="limitDisplay"></span>
+        </div>
+
+        <!-- Sort -->
+        <div class="controls__group">
+          <label for="sortSelect" class="label">Sort Transactions</label>
+          <select id="sortSelect" class="input">
+            <option value="date-desc">Date (Newest)</option>
+            <option value="date-asc">Date (Oldest)</option>
+            <option value="amount-desc">Amount (High → Low)</option>
+            <option value="amount-asc">Amount (Low → High)</option>
+            <option value="category">Category</option>
+          </select>
+        </div>
+
+        <!-- Month Filter -->
+        <div class="controls__group">
+          <label for="monthFilter" class="label">Monthly Summary</label>
+          <input type="month" id="monthFilter" class="input" />
+        </div>
+      </section>
+
+      <!-- ===== ADD CATEGORY ===== -->
+      <section class="section">
+        <h2 class="section__title">Manage Categories</h2>
+        <div class="category-tags" id="categoryTags"></div>
+        <div class="input-row">
+          <input type="text" id="newCategoryInput" class="input" placeholder="New category name..." maxlength="30" />
+          <button class="btn btn--secondary" id="addCategoryBtn">+ Add</button>
+        </div>
+      </section>
+
+      <!-- ===== ADD TRANSACTION ===== -->
+      <section class="section">
+        <h2 class="section__title">Add Transaction</h2>
+        <form id="transactionForm" class="form">
+          <div class="form__row">
+            <div class="form__group">
+              <label for="txDescription" class="label">Description</label>
+              <input type="text" id="txDescription" class="input" placeholder="e.g. Grocery shopping" required maxlength="60" />
+            </div>
+            <div class="form__group">
+              <label for="txAmount" class="label">Amount (Rp)</label>
+              <input type="number" id="txAmount" class="input" placeholder="e.g. 50000" required min="1" />
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="form__group">
+              <label for="txType" class="label">Type</label>
+              <select id="txType" class="input">
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+              </select>
+            </div>
+            <div class="form__group">
+              <label for="txCategory" class="label">Category</label>
+              <select id="txCategory" class="input">
+                <option value="Needs">Needs</option>
+                <option value="Wants">Wants</option>
+                <option value="Goals">Goals</option>
+                <option value="Earning">Earning</option>
+              </select>
+            </div>
+            <div class="form__group">
+              <label for="txDate" class="label">Date</label>
+              <input type="date" id="txDate" class="input" required />
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">+ Add Transaction</button>
+        </form>
+      </section>
+
+      <!-- ===== MONTHLY SUMMARY ===== -->
+      <section class="section" id="summarySection">
+        <h2 class="section__title">Monthly Summary <span id="summaryMonth"></span></h2>
+        <div class="summary-grid" id="summaryGrid">
+          <p class="empty-msg">Select a month above to see the summary.</p>
+        </div>
+      </section>
+
+      <!-- ===== TRANSACTION LIST ===== -->
+      <section class="section">
+        <h2 class="section__title">Transactions</h2>
+        <ul class="tx-list" id="txList">
+          <li class="empty-msg">No transactions yet. Add one above!</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p>Budget Tracker &mdash; Data saved locally in your browser.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
